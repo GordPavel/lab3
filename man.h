@@ -18,7 +18,7 @@ public:
         this->lastName = lastName;
         this->telephoneNumber = telephoneNumber;
         this->birthDate = birthDate;
-    };
+    }
     string toString(){
         string str = "";
         str += this->lastName + " " + this->telephoneNumber + " " + this->birthDate;
@@ -35,18 +35,5 @@ public:
     }
 };
 
-vector<string> &split(const string &s, char delim, vector<string> &elems){
-    stringstream ss( s );
-    string item;
-    while ( getline( ss, item , delim ) )
-        elems.push_back(item);
-    return elems;
-}
-
-vector<string> split(const string &s, char delim){
-    vector<string> elems;
-    split(s, delim, elems);
-    return elems;
-}
 
 #endif // MEN_H

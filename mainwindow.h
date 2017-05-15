@@ -13,8 +13,7 @@ class MainWindow : public QMainWindow{
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0 );
-    void setMen( std::vector<Man*> windowMen );
+    explicit MainWindow( QWidget *parent , std::vector<Man*> men );
     ~MainWindow();
 
 private:

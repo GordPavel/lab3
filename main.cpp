@@ -8,6 +8,20 @@
 #include"man.h"
 using namespace std;
 
+vector<string> &split(const string &s, char delim, vector<string> &elems){
+    stringstream ss( s );
+    string item;
+    while ( getline( ss, item , delim ) )
+        elems.push_back(item);
+    return elems;
+}
+
+vector<string> split(const string &s, char delim){
+    vector<string> elems;
+    split(s, delim, elems);
+    return elems;
+}
+
 int main(int argc, char *argv[]){
     vector<Man*> men;
     men.push_back( new Man( "A" , "+1111111111" , "11.11.11" ) );
@@ -22,10 +36,8 @@ int main(int argc, char *argv[]){
 
 enterCmd:{
     try{
-//        getline( cin , cmd );
-
-        cmd = "-окно";
-        string file( "-файл" ) , console( "-консоль" ) , window( "-окно" ), newMan( "-новый" );
+        getline( cin , cmd );
+        string file( "-файл" ) , console( "-консоль" ) , window( "-окно" ), newMan( "-новый" ), end( "*" );
         words = split( cmd , ' ');
         if( strcmp( words[ 0 ].c_str() , file.c_str() ) == 0 ){
             ofstream out( "/Users/pavelgordeev/Desktop/" + words[ 1 ] + ".txt", ios::app);
@@ -37,12 +49,13 @@ enterCmd:{
                 cout << men->getLastName() << " " << men->getTelephoneNumber() << " " << men->getBirthDate() << '\n';
         }else if( strcmp( words[ 0 ].c_str() , window.c_str() ) == 0 ){
             QApplication a(argc, argv);
-            MainWindow w;
-            w.setMen( men );
+            MainWindow w( 0 , men );
             w.show();
             a.exec();
         }else if( strcmp( words[ 0 ].c_str() , newMan.c_str() ) == 0 ){
-
+            men.push_back( new Man( words[ 1 ] , words[ 2 ] , words[ 3 ]  ) );
+        }else if( strcmp( words[ 0 ].c_str() , end.c_str() ) == 0 ){
+            return 0;
         }else{
             throw IllegalArgumentExceprion( "Неправильная команда ° " + cmd );
         }
@@ -51,6 +64,8 @@ enterCmd:{
         cout << "Введите ещё раз команду." << '\n';
         goto enterCmd;
     }
+        cout << "Введите новую команду, если хотите выполнить ещё какие-то действия или *, если хотите закончить." << '\n';
+        goto enterCmd;
     }
     return 0;
 }

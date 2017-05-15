@@ -17,10 +17,10 @@
    <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>130</y>
-      <width>256</width>
-      <height>192</height>
+      <x>10</x>
+      <y>10</y>
+      <width>331</width>
+      <height>191</height>
      </rect>
     </property>
    </widget>
